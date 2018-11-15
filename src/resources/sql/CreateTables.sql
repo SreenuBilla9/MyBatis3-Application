@@ -1,0 +1,41 @@
+ 
+
+CREATE TABLE ADMINUSER
+(
+username VARCHAR2(50),
+firstname VARCHAR2(50),
+lastname VARCHAR2(50),
+dateofbirth  TIMESTAMP,
+gender VARCHAR2(10),
+isEnabled VARCHAR2(1),
+isLocked VARCHAR2(1),
+createdate  TIMESTAMP,
+updateddate TIMESTAMP
+);
+
+CREATE TABLE ACCOUNT
+(
+accountid NUMBER(10,0),
+username  VARCHAR2(50),
+accounttype  VARCHAR2(10),
+branchcode  VARCHAR2(10),
+isactive  VARCHAR2(10),
+currency  VARCHAR2(10),
+opendate   TIMESTAMP,
+closeddate TIMESTAMP
+);
+CREATE SEQUENCE ACCOUNT_ACCOUNTNO_SEQ START WITH 1000 INCREMENT BY 1;
+ 
+CREATE TABLE TRANSACTION
+(
+transId NUMBER(10,0),
+fromAccId NUMBER(10,0),
+username  VARCHAR2(50),
+toAcId NUMBER(10,0),
+transAmount  NUMBER(10,2),
+status  VARCHAR2(10),
+transDate   TIMESTAMP
+);
+
+ CREATE SEQUENCE TRANSACTION_transId_SEQ START WITH 1 INCREMENT BY 1;
+ 

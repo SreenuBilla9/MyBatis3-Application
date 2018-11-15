@@ -9,15 +9,18 @@
 		<selectKey keyProperty="accountId" resultType="long" order="BEFORE">
 			select ACCOUNT_ACCOUNTNO_SEQ.NEXTVAL from DUAL
 		</selectKey>
-		insert into ACCOUNT	(accountId, username)
-		values	(#{accountId},	#{username})
+		insert into ACCOUNT (accountId, username)
+		values (#{accountId},
+		#{username})
 	</insert>
 
 	<insert id="batchInsert" flushCache="true" parameterType="AccountDTO">
 		INSERT ALL
 		<foreach item="account" collection="list" index="index">
-			into ACCOUNT (accountId, username)
-			values 	(#{accountId},#{account.username})
+			into ACCOUNT
+			(accountId, username)
+			values
+			(#{account.accountId},#{account.username})
 		</foreach>
 		SELECT SYSDATE FROM DUAL
 	</insert>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.billa.dao.TransactionDaoMapper">
+
+	<insert id="insertTrans" flushCache="true" parameterType="TransactionDTO">
+		<selectKey keyProperty="transId" resultType="long" order="BEFORE">
+			select TRANSACTION_transId_SEQ.NEXTVAL from DUAL
+		</selectKey>
+		insert into ACCOUNT (accountId,fromAccId, username,toAcId,transAmount,transDate,status)
+		values (#{transId},#{fromAccId},#{username},#{toAcId},#{transAmount},#{transDate},#{status})
+	</insert>
+
+</mapper>
