@@ -28,7 +28,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.billa.dao.dto.AppUserDTO" alias="AppUserDTO" />
-		
+		<typeAlias type="com.billa.dao.dto.AccountDTO" alias="AccountDTO" />
 		<!--  <package name="com.billa.dao.dto"/>  -->
 		
 	</typeAliases>
@@ -49,6 +49,9 @@
 
 	<mappers>
 		<mapper resource="com/billa/dao/mybatis/xml/AppUserDTO.xml" />
+		<mapper resource="com/billa/dao/mybatis/xml/Account.xml" />
+
+
 		
 		<!-- 
 		<mapper url="file:///var/mappers/BlogMapper.xml"/>
