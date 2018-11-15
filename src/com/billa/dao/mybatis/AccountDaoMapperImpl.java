@@ -7,12 +7,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.billa.dao.AccountDaoMapper;
 import com.billa.dao.dto.AccountDTO;
+import com.billa.dao.exception.DatabaseException;
 import com.billa.dao.util.MyBatisUtil;
 
 public class AccountDaoMapperImpl implements AccountDaoMapper {
 
 	@Override
-	public int insertAccount(AccountDTO accountDTO) {
+	public int insertAccount(AccountDTO accountDTO) throws DatabaseException {
 		SqlSessionFactory factory = null;
 		SqlSession session = null;
 		try {
@@ -22,6 +23,8 @@ public class AccountDaoMapperImpl implements AccountDaoMapper {
 			int count = mapper.insertAccount(accountDTO);
 			session.commit();
 			return count;
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			if (null != session)
 				session.close();
@@ -30,7 +33,7 @@ public class AccountDaoMapperImpl implements AccountDaoMapper {
 	}
 
 	@Override
-	public int batchInsert(List<AccountDTO> list) {
+	public int batchInsert(List<AccountDTO> list) throws DatabaseException {
 		SqlSessionFactory factory = null;
 		SqlSession session = null;
 		try {
@@ -45,6 +48,8 @@ public class AccountDaoMapperImpl implements AccountDaoMapper {
 			}
 			session.commit();
 			return totalCount;
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			if (null != session)
 				session.close();

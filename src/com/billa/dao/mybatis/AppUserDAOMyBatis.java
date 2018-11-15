@@ -5,12 +5,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.billa.dao.AppUserDAO;
 import com.billa.dao.dto.AppUserDTO;
+import com.billa.dao.exception.DatabaseException;
 import com.billa.dao.util.MyBatisUtil;
 
 public class AppUserDAOMyBatis implements AppUserDAO {
 
 	@Override
-	public AppUserDTO selectAppUser(String username) {
+	public AppUserDTO selectAppUser(String username) throws DatabaseException {
 		SqlSessionFactory factory = null;
 		SqlSession session = null;
 		try {
@@ -18,6 +19,8 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 			session = factory.openSession();
 			AppUserDAO mapper = session.getMapper(AppUserDAO.class);
 			return mapper.selectAppUser(username);
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			if (null != session)
 				session.close();
@@ -25,7 +28,7 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 	}
 
 	@Override
-	public int insertAppUser(AppUserDTO appuser) {
+	public int insertAppUser(AppUserDTO appuser) throws DatabaseException {
 		SqlSessionFactory factory = null;
 		SqlSession session = null;
 		try {
@@ -35,6 +38,8 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 			int count = mapper.insertAppUser(appuser);
 			session.commit();
 			return count;
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			if (null != session)
 				session.close();
@@ -43,7 +48,7 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 	}
 
 	@Override
-	public int updateAppUser(AppUserDTO appuser) {
+	public int updateAppUser(AppUserDTO appuser) throws DatabaseException {
 		SqlSessionFactory factory = null;
 		SqlSession session = null;
 		try {
@@ -53,6 +58,8 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 			int count = mapper.updateAppUser(appuser);
 			session.commit();
 			return count;
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			if (null != session)
 				session.close();
@@ -60,7 +67,7 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 	}
 
 	@Override
-	public int deleteAppUser(AppUserDTO appuser) {
+	public int deleteAppUser(AppUserDTO appuser) throws DatabaseException {
 
 		SqlSessionFactory factory = null;
 		SqlSession session = null;
@@ -71,6 +78,8 @@ public class AppUserDAOMyBatis implements AppUserDAO {
 			int count = mapper.deleteAppUser(appuser);
 			session.commit();
 			return count;
+		} catch (Exception e) {
+			throw e;
 		} finally {
 			if (null != session)
 				session.close();

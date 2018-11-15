@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import com.billa.dao.dto.AppUserDTO;
+import com.billa.dao.exception.DatabaseException;
 import com.billa.dao.mybatis.AppUserDAOMyBatis;
 
 public class TestMyBatisApp {
@@ -58,7 +59,13 @@ public class TestMyBatisApp {
 	public void selectUser() {
 		System.out.println("selectUser  start");
 		AppUserDAOMyBatis dao = new AppUserDAOMyBatis();
-		AppUserDTO user = dao.selectAppUser("Test12389");
+		AppUserDTO user = null;
+		try {
+			user = dao.selectAppUser("Test12389");
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(user);
 		System.out.println("selectUser  end");
 	}
