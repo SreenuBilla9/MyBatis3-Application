@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.billa.dao.dto.AppUserDTO;
@@ -12,12 +13,15 @@ public class TestMyBatisApp {
 		System.out.println("deleteUser start");
 		AppUserDTO user = new AppUserDTO();
 
-		user.setUsername("Test12389");
+		user.setUsername("TESTUSER");
 		try {
 			int rows = dao.deleteAppUser(user);
 			System.out.println("rows=" + rows);
+			if (rows == 0)
+				Assert.fail("User " + user.getUsername() + " does not exists");
 		} catch (Exception e) {
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 		System.out.println("deleteUser end");
 	}
@@ -28,12 +32,13 @@ public class TestMyBatisApp {
 		System.out.println("insertUser start");
 		AppUserDTO user = new AppUserDTO();
 
-		user.setUsername("Test12389");
+		user.setUsername("Test1234");
 		try {
 			int rows = dao.insertAppUser(user);
 			System.out.println("rows=" + rows);
 		} catch (Exception e) {
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 		System.out.println("insertUser end");
 	}
@@ -49,8 +54,11 @@ public class TestMyBatisApp {
 		try {
 			int rows = dao.updateAppUser(user);
 			System.out.println("rows=" + rows);
+			if (rows == 0)
+				Assert.fail("No record found to update , " + user.getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 		System.out.println("updateUser end");
 	}
@@ -61,10 +69,10 @@ public class TestMyBatisApp {
 		AppUserDAOMyBatis dao = new AppUserDAOMyBatis();
 		AppUserDTO user = null;
 		try {
-			user = dao.selectAppUser("Test12389");
+			user = dao.selectAppUser("Test1234");
 		} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 		System.out.println(user);
 		System.out.println("selectUser  end");

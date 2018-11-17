@@ -42,10 +42,10 @@ public class AccountDaoMapperImpl implements AccountDaoMapper {
 			AccountDaoMapper mapper = session.getMapper(AccountDaoMapper.class);
 			int totalCount = 0;
 			for (AccountDTO ddto : list) {
-				int count = mapper.insertAccount(ddto);
-				System.out.println("count=" + count);
-				totalCount = totalCount + count;
+				long seqNo = mapper.getSeqNum();
+				ddto.setAccountId(seqNo);
 			}
+			totalCount = mapper.batchInsert(list);
 			session.commit();
 			return totalCount;
 		} catch (Exception e) {
@@ -55,6 +55,12 @@ public class AccountDaoMapperImpl implements AccountDaoMapper {
 				session.close();
 		}
 
+	}
+
+	@Override
+	public long getSeqNum() throws DatabaseException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -3,6 +3,7 @@ package com.test.dao.account;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.billa.dao.dto.AccountDTO;
@@ -15,12 +16,12 @@ public class TestAccountMapper {
 		List<AccountDTO> list = new ArrayList<AccountDTO>();
 
 		AccountDTO accountDTO = new AccountDTO();
-		accountDTO.setUsername("Test1235");
+		accountDTO.setUsername("Test1234");
 		accountDTO.setAccounttype("SBA");
 		list.add(accountDTO);
 
 		accountDTO = new AccountDTO();
-		accountDTO.setUsername("Test1235");
+		accountDTO.setUsername("Test1234");
 		accountDTO.setAccounttype("SBB");
 		list.add(accountDTO);
 
@@ -32,6 +33,7 @@ public class TestAccountMapper {
 			System.out.println("total row count=" + rows);
 		} catch (Exception e) {
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 		
 		System.out.println("AccountDaoMapperImpl insertAccount end");

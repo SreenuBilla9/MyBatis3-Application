@@ -15,35 +15,27 @@
 
 
 	<select id="selectAppUser" resultType="AppUserDTO">
-		select * from ADMINUSER
-		where username = #{username}
+		select * from ADMINUSER	where username = #{username}
 	</select>
 
 	<select id="selectUsersByEnableFlag" resultMap="AppUserMap">
-		select username,
-		dateofbirth,isEnabled,isLocked
-		from ADMINUSER
-		where isEnabled =
-		#{isEnabled}
+		select username,dateofbirth,isEnabled,isLocked	from ADMINUSER
+		where isEnabled =	#{isEnabled}
 	</select>
 
 	<select id="selectUsersByLockFlag" resultMap="AppUserMap">
-		select username,
-		dateofbirth,isEnabled,isLocked
-		from ADMINUSER
-		where isLocked =
-		#{isLocked}
+		select username,dateofbirth,isEnabled,isLocked	from ADMINUSER
+		where isLocked =	#{isLocked}
 	</select>
 
 	<insert id="insertAppUser" flushCache="true" parameterType="AppUserDTO">
-		INSERT INTO ADMINUSER(username) VALUES(#{username})
+		INSERT INTO ADMINUSER(username,firstName,lastName,dateofbirth,gender,isEnabled,isLocked,createdate,updateddate)
+		 VALUES(#{username},#{firstName},#{lastName},#{dateofbirth},#{gender},#{isEnabled},#{isLocked},#{createdate},#{updateddate})
 	</insert>
 
 	<update id="updateAppUser" flushCache="true" parameterType="AppUserDTO">
 		UPDATE ADMINUSER SET
-		isLocked = #{isLocked},isEnabled = #{isEnabled}
-		where username =
-		#{username}
+		isLocked = #{isLocked},isEnabled = #{isEnabled}	where username =#{username}
 	</update>
 
 	<delete id="deleteAppUser" flushCache="true" parameterType="AppUserDTO">

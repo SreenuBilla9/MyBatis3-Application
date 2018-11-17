@@ -9,18 +9,22 @@
 		<selectKey keyProperty="accountId" resultType="long" order="BEFORE">
 			select ACCOUNT_ACCOUNTNO_SEQ.NEXTVAL from DUAL
 		</selectKey>
-		insert into ACCOUNT (accountId, username)
-		values (#{accountId},
-		#{username})
+		insert into ACCOUNT (accountId, username,accounttype,branchcode,isactive,currency,opendate,closeddate)
+		values (#{accountId},#{username},#{accounttype},#{branchcode},#{isactive},#{currency},#{opendate},#{closeddate})
 	</insert>
+
+	<select id="getSeqNum" resultType="long">
+		select
+		ACCOUNT_ACCOUNTNO_SEQ.NEXTVAL from DUAL
+	</select>
 
 	<insert id="batchInsert" flushCache="true" parameterType="AccountDTO">
 		INSERT ALL
 		<foreach item="account" collection="list" index="index">
 			into ACCOUNT
-			(accountId, username)
+			(accountId, username,accounttype,branchcode,isactive,currency,opendate,closeddate)
 			values
-			(#{account.accountId},#{account.username})
+			(#{account.accountId},#{account.username},#{accounttype},#{branchcode},#{isactive},#{currency},#{opendate},#{closeddate})
 		</foreach>
 		SELECT SYSDATE FROM DUAL
 	</insert>

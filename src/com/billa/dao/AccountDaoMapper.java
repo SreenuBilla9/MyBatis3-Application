@@ -10,4 +10,6 @@ public interface AccountDaoMapper {
 	int insertAccount(AccountDTO accountDTO) throws DatabaseException;
 
 	int batchInsert(List<AccountDTO> list) throws DatabaseException;
+
+	long getSeqNum() throws DatabaseException;
 }
